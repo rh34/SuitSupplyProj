@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SS.Product.Api.Configurations;
 using SS.Repositories;
 using SS.Services;
 
@@ -33,6 +35,7 @@ namespace SS.Product.Api
 
             services.AddMvc();
 
+            services.AddAutoMapper();
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
             containerBuilder.RegisterType<ProductService>().As<IProductService>();

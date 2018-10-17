@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SS.Entities.Data;
@@ -15,41 +16,39 @@ namespace SS.Product.Api.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
         [HttpGet("", Name = "GetProducts")]
         public IActionResult Get()
         {
             var products = _productService.GetProducts();
-            return Ok(products);
+            var productDtos = _mapper.Map<IEnumerable<ProductDto>>(products);
+
+            return Ok(productDtos);
         }
         
         [HttpGet("{id}", Name = "GetProductById")]
         public IActionResult Get(Guid id)
         {
             var product = _productService.GetProductById(id);
-            return Ok(product);
+            var productDto = _mapper.Map<ProductDto>(product);
+
+            return Ok(productDto);
         }
 
         [HttpPost]
         public IActionResult Post(ProductForCreationDto productForCreation)
         {
-            var newId = Guid.NewGuid();
-            var product = new Entities.Data.Product
-            {
-                Id = newId,
-                Name = productForCreation.Name,
-                Price = productForCreation.Price,
-                PhotoUrl = productForCreation.PhotoUrl,
-                LastUpdated = productForCreation.LastUpdated,
-                Currency = (CurrencyEnum)productForCreation.Currency
-            };
+            var product = _mapper.Map<Entities.Data.Product>(productForCreation);
 
             var result = _productService.CreateProduct(product);
+
             return CreatedAtRoute("GetProductById", new {id = product.Id}, product);
         }
 
