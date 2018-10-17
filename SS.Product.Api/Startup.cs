@@ -7,6 +7,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SS.Repositories;
@@ -28,6 +29,8 @@ namespace SS.Product.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ProductDbContext>(opt => opt.UseInMemoryDatabase());
+
             services.AddMvc();
 
             var containerBuilder = new ContainerBuilder();
@@ -48,8 +51,6 @@ namespace SS.Product.Api
             }
 
             app.UseMvc();
-
-             
         }
     }
 }

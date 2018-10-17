@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SS.Entities.Data;
 
 namespace SS.Repositories
@@ -9,5 +10,6 @@ namespace SS.Repositories
         Product UpdateProduct(Guid id, Product product);
         bool DeleteProduct(Guid id);
         bool CreateProduct(Product product);
+        IEnumerable<Product> GetProducts();
     }
 }

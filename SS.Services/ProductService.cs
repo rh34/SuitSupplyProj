@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SS.Entities.Data;
 using SS.Repositories;
 
@@ -12,9 +13,14 @@ namespace SS.Services
         {
             _productRepository = productRepository;
         }
+        public IEnumerable<Product> GetProducts()
+        {
+            return _productRepository.GetProducts();
+        }
+
         public Product GetProductById(Guid id)
         {
-            throw new NotImplementedException();
+            return _productRepository.GetProductById(id);
         }
 
         public Product UpdateProduct(Guid id, Product product)
@@ -29,7 +35,7 @@ namespace SS.Services
 
         public bool CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            return _productRepository.CreateProduct(product);
         }
     }
 }

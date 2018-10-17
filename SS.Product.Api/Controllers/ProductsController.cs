@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SS.Entities.Data;
 using SS.Product.Api.Models;
 using SS.Services;
 
@@ -23,22 +24,33 @@ namespace SS.Product.Api.Controllers
         [HttpGet("", Name = "GetProducts")]
         public IActionResult Get()
         {
-            //TODO:get product
-            return Ok(new List<ProductDto>(){new ProductDto(), new ProductDto()});
+            var products = _productService.GetProducts();
+            return Ok(products);
         }
         
         [HttpGet("{id}", Name = "GetProductById")]
         public IActionResult Get(Guid id)
         {
-            //TODO:get product
-            return Ok(new ProductDto());
+            var product = _productService.GetProductById(id);
+            return Ok(product);
         }
 
         [HttpPost]
-        public IActionResult Post(ProductDto product)
+        public IActionResult Post(ProductForCreationDto productForCreation)
         {
-            //TODO:create product
-            return CreatedAtRoute("GetProductById", product.Id);
+            var newId = Guid.NewGuid();
+            var product = new Entities.Data.Product
+            {
+                Id = newId,
+                Name = productForCreation.Name,
+                Price = productForCreation.Price,
+                PhotoUrl = productForCreation.PhotoUrl,
+                LastUpdated = productForCreation.LastUpdated,
+                Currency = (CurrencyEnum)productForCreation.Currency
+            };
+
+            var result = _productService.CreateProduct(product);
+            return CreatedAtRoute("GetProductById", new {id = product.Id}, product);
         }
 
         [HttpPut]

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using SS.Entities.Data;
 
 namespace SS.Services
 {
     public interface IProductService
     {
+        IEnumerable<Product> GetProducts();
         Product GetProductById(Guid id);
         Product UpdateProduct(Guid id, Product product);
         bool DeleteProduct(Guid id);
