@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS.Entities.Data
+namespace SS.Product.Api.Models
 {
     public class ProductDto
     {
@@ -9,6 +9,6 @@ namespace SS.Entities.Data
         public string PhotoUrl { get; set; }
         public decimal Price { get; set; }
         public DateTime LastUpdated { get; set; }
-        public CurrencyEnum Currency { get; set; }
+        public CurrencyEnumDto Currency { get; set; }
     }
 }

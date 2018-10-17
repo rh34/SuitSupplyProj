@@ -1,6 +1,6 @@
-﻿namespace SS.Entities.Data
+﻿namespace SS.Product.Api.Models
 {
-    public enum CurrencyEnum
+    public enum CurrencyEnumDto
     {
         EUR = 1,
         USD = 2,
