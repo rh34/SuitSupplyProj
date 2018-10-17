@@ -7,8 +7,8 @@ namespace SS.Repositories
     public interface IProductRepository
     {
         Product GetProductById(Guid id);
-        Product UpdateProduct(Guid id, Product product);
-        bool DeleteProduct(Guid id);
+        bool UpdateProduct(Product product);
+        bool DeleteProduct(Product product);
         bool CreateProduct(Product product);
         IEnumerable<Product> GetProducts();
     }

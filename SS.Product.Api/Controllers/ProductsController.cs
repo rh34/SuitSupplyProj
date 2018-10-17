@@ -28,22 +28,32 @@ namespace SS.Product.Api.Controllers
         public IActionResult Get()
         {
             var products = _productService.GetProducts();
+            if (products == null)
+            { 
+                return NotFound();
+            }
+
             var productDtos = _mapper.Map<IEnumerable<ProductDto>>(products);
 
             return Ok(productDtos);
         }
-        
+
         [HttpGet("{id}", Name = "GetProductById")]
-        public IActionResult Get(Guid id)
+        public IActionResult Get([FromRoute] Guid id)
         {
             var product = _productService.GetProductById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
             var productDto = _mapper.Map<ProductDto>(product);
 
             return Ok(productDto);
         }
 
         [HttpPost]
-        public IActionResult Post(ProductForCreationDto productForCreation)
+        public IActionResult Post([FromBody] ProductForCreationDto productForCreation)
         {
             var product = _mapper.Map<Entities.Data.Product>(productForCreation);
 
@@ -52,17 +62,40 @@ namespace SS.Product.Api.Controllers
             return CreatedAtRoute("GetProductById", new {id = product.Id}, product);
         }
 
-        [HttpPut]
-        public IActionResult Put(ProductDto product)
+        [HttpPut("{id}")]
+        public IActionResult Put([FromRoute] Guid id, [FromBody] ProductDto productDto)
         {
-            //TODO:update product
-            return Ok(product);
+            var product = _productService.GetProductById(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var s = _mapper.Map(productDto, product);
+            s.Id = id;
+            var success =_productService.UpdateProduct(s);
+
+            if (success)
+            {
+                return NoContent();
+            }
+
+            throw new Exception($"An error occured while updating the product with Id: {id}");
         }
 
-        [HttpDelete]
-        public IActionResult Delete(Guid id)
+        [HttpDelete("id")]
+        public IActionResult Delete([FromQuery] Guid id)
         {
-            //TODO:delete product
+            var product = _productService.GetProductById(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var result = _productService.DeleteProduct(product);
+
             return NoContent();
         }
     }

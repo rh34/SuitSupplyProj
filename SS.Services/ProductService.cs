@@ -23,14 +23,14 @@ namespace SS.Services
             return _productRepository.GetProductById(id);
         }
 
-        public Product UpdateProduct(Guid id, Product product)
+        public bool UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            return _productRepository.UpdateProduct(product);
         }
 
-        public bool DeleteProduct(Guid id)
+        public bool DeleteProduct(Product product)
         {
-            throw new NotImplementedException();
+            return _productRepository.DeleteProduct(product);
         }
 
         public bool CreateProduct(Product product)

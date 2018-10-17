@@ -8,8 +8,8 @@ namespace SS.Services
     {
         IEnumerable<Product> GetProducts();
         Product GetProductById(Guid id);
-        Product UpdateProduct(Guid id, Product product);
-        bool DeleteProduct(Guid id);
+        bool UpdateProduct(Product product);
+        bool DeleteProduct(Product product);
         bool CreateProduct(Product product);
     }
 }

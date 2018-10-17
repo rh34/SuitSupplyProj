@@ -15,18 +15,19 @@ namespace SS.Repositories
         }
         public Product GetProductById(Guid id)
         {
-            return _productDbContext.Products.First();
-            throw new NotImplementedException();
+            return _productDbContext.Products.FirstOrDefault(p => p.Id == id);
         }
 
-        public Product UpdateProduct(Guid id, Product product)
+        public bool UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            var result = _productDbContext.Products.Update(product);
+            return _productDbContext.SaveChanges() > 0;
         }
 
-        public bool DeleteProduct(Guid id)
+        public bool DeleteProduct(Product product)
         {
-            throw new NotImplementedException();
+            var result = _productDbContext.Products.Remove(product);
+            return result != null;
         }
 
         public bool CreateProduct(Product product)
