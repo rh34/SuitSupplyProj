@@ -20,10 +20,39 @@ namespace SS.Product.Api.Controllers
             _productService = productService;
         }
 
-        [HttpGet]
+        [HttpGet("", Name = "GetProducts")]
         public IActionResult Get()
         {
+            //TODO:get product
+            return Ok(new List<ProductDto>(){new ProductDto(), new ProductDto()});
+        }
+        
+        [HttpGet("{id}", Name = "GetProductById")]
+        public IActionResult Get(Guid id)
+        {
+            //TODO:get product
             return Ok(new ProductDto());
+        }
+
+        [HttpPost]
+        public IActionResult Post(ProductDto product)
+        {
+            //TODO:create product
+            return CreatedAtRoute("GetProductById", product.Id);
+        }
+
+        [HttpPut]
+        public IActionResult Put(ProductDto product)
+        {
+            //TODO:update product
+            return Ok(product);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(Guid id)
+        {
+            //TODO:delete product
+            return NoContent();
         }
     }
 }
