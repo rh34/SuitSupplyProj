@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.4.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Moq" Version="4.10.0" />
     <PackageReference Include="NUnit" Version="3.11.0" />
@@ -13,8 +14,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SS.Product.Api\SS.Product.Api.csproj" />
     <ProjectReference Include="..\SS.Repositories\SS.Repositories.csproj" />
     <ProjectReference Include="..\SS.Services\SS.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions">
+      <HintPath>..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.mvc.abstractions\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
+      <HintPath>..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.mvc.core\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
