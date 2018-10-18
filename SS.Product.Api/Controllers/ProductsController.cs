@@ -11,6 +11,9 @@ using SS.Services;
 
 namespace SS.Product.Api.Controllers
 {
+    /// <summary>
+    /// Products controller
+    /// </summary>
     [Route("api/products")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -24,6 +27,10 @@ namespace SS.Product.Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all products
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("", Name = "GetProducts")]
         public IActionResult Get()
         {
@@ -38,6 +45,11 @@ namespace SS.Product.Api.Controllers
             return Ok(productDtos);
         }
 
+        /// <summary>
+        /// Get single product by Id
+        /// </summary>
+        /// <param name="id">Product Identifier</param>
+        /// <returns></returns>
         [HttpGet("{id}", Name = "GetProductById")]
         public IActionResult Get([FromRoute] Guid id)
         {
@@ -52,6 +64,11 @@ namespace SS.Product.Api.Controllers
             return Ok(productDto);
         }
 
+        /// <summary>
+        /// Create new product
+        /// </summary>
+        /// <param name="productForCreation">Product data for creation</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Post([FromBody] ProductForCreationDto productForCreation)
         {
@@ -62,6 +79,12 @@ namespace SS.Product.Api.Controllers
             return CreatedAtRoute("GetProductById", new {id = product.Id}, product);
         }
 
+        /// <summary>
+        /// Update full product
+        /// </summary>
+        /// <param name="id">Product Identifier</param>
+        /// <param name="productDto">Product data to update</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute] Guid id, [FromBody] ProductDto productDto)
         {
@@ -84,6 +107,11 @@ namespace SS.Product.Api.Controllers
             throw new Exception($"An error occured while updating the product with Id: {id}");
         }
 
+        /// <summary>
+        /// Delete product
+        /// </summary>
+        /// <param name="id">Product Identifier</param>
+        /// <returns></returns>
         [HttpDelete("id")]
         public IActionResult Delete([FromQuery] Guid id)
         {
