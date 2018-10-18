@@ -87,6 +87,19 @@ namespace SS.Product.Api.Tests
         }
 
         [Test]
+        public void Given_NoProducts_InRepo_GetProducts_Should_ReturnNotFound()
+        {
+            _mockedService.Setup(p => p.GetProducts()).Returns((IEnumerable<Entities.Data.Product>) null);
+            var actionResult = _productsController.Get();
+            var result = actionResult as NotFoundResult;
+
+            result.Should().NotBeNull();
+
+            _mockedService.Verify(r => r.GetProducts(), Times.Once);
+            _mockedMapper.Verify(r => r.Map<IEnumerable<ProductDto>>(It.IsAny<IEnumerable<Entities.Data.Product>>()), Times.Never);
+        }
+
+        [Test]
         public void Should_Call_GetProductById_On_ProductService()
         {
             var actionResult = _productsController.Get(Guid.NewGuid());
@@ -95,6 +108,19 @@ namespace SS.Product.Api.Tests
             result.Should().NotBeNull();
             result.Value.Should().NotBeNull();
             _mockedService.Verify(r => r.GetProductById(It.IsAny<Guid>()), Times.Once);
+        }
+
+        [Test]
+        public void Given_NoMatch_InRepo_GetProductById_Should_ReturnNotFound()
+        {
+            _mockedService.Setup(p => p.GetProductById(It.IsAny<Guid>())).Returns((Entities.Data.Product)null);
+            var actionResult = _productsController.Get(Guid.NewGuid());
+            var result = actionResult as NotFoundResult;
+
+            result.Should().NotBeNull();
+
+            _mockedService.Verify(r => r.GetProductById(It.IsAny<Guid>()), Times.Once);
+            _mockedMapper.Verify(r => r.Map<ProductDto>(It.IsAny<Entities.Data.Product>()), Times.Never);
         }
     }
 }
