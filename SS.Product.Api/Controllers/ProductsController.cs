@@ -32,6 +32,8 @@ namespace SS.Product.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("", Name = "GetProducts")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ProductDto>))]
+        [ProducesResponseType(404)]
         public IActionResult Get()
         {
             var products = _productService.GetProducts();
@@ -51,6 +53,8 @@ namespace SS.Product.Api.Controllers
         /// <param name="id">Product Identifier</param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetProductById")]
+        [ProducesResponseType(200, Type = typeof(ProductDto))]
+        [ProducesResponseType(404)]
         public IActionResult Get([FromRoute] Guid id)
         {
             var product = _productService.GetProductById(id);
@@ -70,8 +74,15 @@ namespace SS.Product.Api.Controllers
         /// <param name="productForCreation">Product data for creation</param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public IActionResult Post([FromBody] ProductForCreationDto productForCreation)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var product = _mapper.Map<Entities.Data.Product>(productForCreation);
 
             var result = _productService.CreateProduct(product);
@@ -86,6 +97,8 @@ namespace SS.Product.Api.Controllers
         /// <param name="productDto">Product data to update</param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
         public IActionResult Put([FromRoute] Guid id, [FromBody] ProductDto productDto)
         {
             var product = _productService.GetProductById(id);
@@ -113,6 +126,8 @@ namespace SS.Product.Api.Controllers
         /// <param name="id">Product Identifier</param>
         /// <returns></returns>
         [HttpDelete("id")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
         public IActionResult Delete([FromQuery] Guid id)
         {
             var product = _productService.GetProductById(id);
