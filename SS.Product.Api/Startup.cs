@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SS.Product.Api.Configurations;
 using SS.Repositories;
 using SS.Services;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace SS.Product.Api
 {
@@ -36,6 +37,22 @@ namespace SS.Product.Api
             services.AddMvc();
 
             services.AddAutoMapper();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "Suitsupply Product API",
+                    Version = "v1",
+                    Contact = new Contact()
+                    {
+                        Name = "Alkan Kaya",
+                        Email = "alkankaya@live.com",
+                        Url = "https://www.linkedin.com/in/kayaalkan/"
+                    }
+                });
+            });
+
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
             containerBuilder.RegisterType<ProductService>().As<IProductService>();
@@ -52,6 +69,16 @@ namespace SS.Product.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Suitsupply Product API V1");
+            });
 
             app.UseMvc();
         }
