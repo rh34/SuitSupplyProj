@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SS.UI.MVC.Controllers;
+using SS.UI.MVC.Extensions;
 
 namespace SS.UI.MVC
 {
@@ -29,6 +31,10 @@ namespace SS.UI.MVC
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddHttpFactories(Configuration);
+
+            services.AddTransient<IProductApiClient, ProductApiClient>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

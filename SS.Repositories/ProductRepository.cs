@@ -27,7 +27,7 @@ namespace SS.Repositories
         public bool DeleteProduct(Product product)
         {
             var result = _productDbContext.Products.Remove(product);
-            return result != null;
+            return _productDbContext.SaveChanges() > 0;
         }
 
         public bool CreateProduct(Product product)

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SS.Entities.Data;
 using SS.Product.Api.Models;
 using SS.Services;
@@ -26,6 +27,7 @@ namespace SS.Product.Api.Controllers
             _productService = productService;
             _mapper = mapper;
         }
+         
 
         /// <summary>
         /// Get all products
@@ -125,10 +127,10 @@ namespace SS.Product.Api.Controllers
         /// </summary>
         /// <param name="id">Product Identifier</param>
         /// <returns></returns>
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult Delete([FromQuery] Guid id)
+        public IActionResult Delete([FromRoute] Guid id)
         {
             var product = _productService.GetProductById(id);
 
