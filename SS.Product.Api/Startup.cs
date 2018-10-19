@@ -36,6 +36,15 @@ namespace SS.Product.Api
         {
             services.AddDbContext<ProductDbContext>(opt => opt.UseInMemoryDatabase());
 
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader()
+            //            .AllowCredentials());
+            //});
+
             services.AddMvc();
 
             services.AddAutoMapper();
@@ -86,6 +95,8 @@ namespace SS.Product.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Suitsupply Product API V1");
             });
+
+            //app.UseCors("CorsPolicy");
 
             app.UseMvc();
         }
