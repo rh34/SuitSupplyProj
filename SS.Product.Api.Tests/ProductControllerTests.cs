@@ -23,8 +23,10 @@ namespace SS.Product.Api.Tests
             _mockedMapper = new Mock<IMapper>();
             _mockedMapper.Setup(m => m.Map<Entities.Data.Product>(It.IsAny<ProductDto>())).Returns(new Entities.Data.Product());
             _mockedMapper.Setup(m => m.Map<Entities.Data.Product>(It.IsAny<ProductForCreationDto>())).Returns(new Entities.Data.Product());
+            _mockedMapper.Setup(m => m.Map<Entities.Data.Product>(It.IsAny<ProductForUpdateDto>())).Returns(new Entities.Data.Product());
             _mockedMapper.Setup(m => m.Map<ProductDto>(It.IsAny<Entities.Data.Product>())).Returns(new ProductDto());
             _mockedMapper.Setup(m => m.Map(It.IsAny<ProductDto>(), It.IsAny<Entities.Data.Product>())).Returns(new Entities.Data.Product());
+            _mockedMapper.Setup(m => m.Map(It.IsAny<ProductForUpdateDto>(), It.IsAny<Entities.Data.Product>())).Returns(new Entities.Data.Product());
 
             _mockedService = new Mock<IProductService>();
             _mockedService.Setup(r => r.GetProductById(It.IsAny<Guid>())).Returns(new Entities.Data.Product());
@@ -63,7 +65,7 @@ namespace SS.Product.Api.Tests
         [Test]
         public void Should_Call_Update_On_ProductService()
         {
-            var actionResult = _productsController.Put(Guid.NewGuid(), new ProductDto());
+            var actionResult = _productsController.Put(Guid.NewGuid(), new ProductForUpdateDto());
             var result = actionResult as NoContentResult;
 
             result.Should().NotBeNull();
