@@ -85,6 +85,8 @@ namespace SS.Product.Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            productForCreation.LastUpdated = DateTime.Now;
+            
             var product = _mapper.Map<Entities.Data.Product>(productForCreation);
 
             var result = _productService.CreateProduct(product);
@@ -103,16 +105,18 @@ namespace SS.Product.Api.Controllers
         [ProducesResponseType(404)]
         public IActionResult Put([FromRoute] Guid id, [FromBody] ProductDto productDto)
         {
-            var product = _productService.GetProductById(id);
+            var productFromRepo = _productService.GetProductById(id);
 
-            if (product == null)
+            if (productFromRepo == null)
             {
                 return NotFound();
             }
 
-            var s = _mapper.Map(productDto, product);
-            s.Id = id;
-            var success =_productService.UpdateProduct(s);
+            var productUpdated = _mapper.Map(productDto, productFromRepo);
+            productUpdated.Id = id;
+            productUpdated.LastUpdated = DateTime.Now;
+            
+            var success =_productService.UpdateProduct(productUpdated);
 
             if (success)
             {

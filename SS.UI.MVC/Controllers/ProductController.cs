@@ -49,8 +49,6 @@ namespace SS.UI.MVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    productModel.LastUpdated = DateTime.Now;
-                    
                     var result = _productApiClient.CreateAsync(productModel).Result;
                 }
 
