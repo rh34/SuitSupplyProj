@@ -5,40 +5,37 @@ using SS.Entities.Data;
 
 namespace SS.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : GenericRepository<Product>, IProductRepository
     {
-        private readonly ProductDbContext _productDbContext;
-
-        public ProductRepository(ProductDbContext productDbContext)
+        public ProductRepository(SuitsupplyDbContext dbContext) : base(dbContext)
         {
-            _productDbContext = productDbContext;
         }
         public Product GetProductById(Guid id)
         {
-            return _productDbContext.Products.FirstOrDefault(p => p.Id == id);
+            return FindBy(p => p.Id == id).FirstOrDefault();
         }
 
         public bool UpdateProduct(Product product)
         {
-            var result = _productDbContext.Products.Update(product);
-            return _productDbContext.SaveChanges() > 0;
+            Edit(product);
+            return Save();
         }
 
         public bool DeleteProduct(Product product)
         {
-            var result = _productDbContext.Products.Remove(product);
-            return _productDbContext.SaveChanges() > 0;
+            Delete(product);
+            return Save();
         }
 
         public bool CreateProduct(Product product)
         {
-            _productDbContext.Products.Add(product);
-            return _productDbContext.SaveChanges() > 0;
+            Add(product);
+            return Save();
         }
 
         public IEnumerable<Product> GetProducts()
         {
-            return _productDbContext.Products;
+            return GetAll();
         }
     }
 }

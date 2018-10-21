@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SS.Repositories", "SS.Repos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SS.Services", "SS.Services\SS.Services.csproj", "{7BC6A814-7A1F-46C0-A8AC-0BBBA920F4CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS.UI.MVC", "SS.UI.MVC\SS.UI.MVC.csproj", "{DE68C8B5-B244-4A72-8A49-E55D6F087225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SS.UI.MVC", "SS.UI.MVC\SS.UI.MVC.csproj", "{DE68C8B5-B244-4A72-8A49-E55D6F087225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

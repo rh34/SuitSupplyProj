@@ -3,9 +3,9 @@ using SS.Entities.Data;
 
 namespace SS.Repositories
 {
-    public class ProductDbContext : DbContext
+    public class SuitsupplyDbContext : DbContext
     {
-        public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options)
+        public SuitsupplyDbContext(DbContextOptions<SuitsupplyDbContext> options) : base(options)
         {
             
         }

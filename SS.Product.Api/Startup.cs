@@ -29,7 +29,7 @@ namespace SS.Product.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ProductDbContext>(opt => opt.UseInMemoryDatabase());
+            services.AddDbContext<SuitsupplyDbContext>(opt => opt.UseInMemoryDatabase());
 
             //services.AddCors(options =>
             //{
