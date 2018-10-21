@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SS.UI.MVC.Clients;
@@ -18,8 +21,7 @@ namespace SS.UI.MVC.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            IEnumerable<ProductModel> products = _productApiClient.GetProductsAsync().Result;
-            //return View(products);
+            var products = _productApiClient.GetProductsAsync().Result;
 
             return View("List", products);
         }
@@ -107,6 +109,34 @@ namespace SS.UI.MVC.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        public IActionResult ExportExcel()
+        {
+            var dataTable = new DataTable("Suitsupply Products");
+            dataTable.Columns.AddRange(new[] { new DataColumn("Id"),
+                new DataColumn("Name"),
+                new DataColumn("PhotoUrl"),
+                new DataColumn("Price"),
+                new DataColumn("Currency"),
+                new DataColumn("LastUpdated") });
+
+            var productsFromApi = _productApiClient.GetProductsAsync().Result;
+
+            foreach (var product in productsFromApi)
+            {
+                dataTable.Rows.Add(product.Id, product.Name, product.PhotoUrl, product.Price, product.Currency, product.LastUpdated);
+            }
+
+            using (var wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dataTable);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+                }
             }
         }
     }
