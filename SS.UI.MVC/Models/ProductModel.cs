@@ -18,6 +18,7 @@ namespace SS.UI.MVC.Models
         [Required]
         [EnumDataType(typeof(CurrencyEnum), ErrorMessage = "Currency value doesn't exist within enum.")]
         public CurrencyEnum Currency { get; set; }
+        public DateTime Created { get; set; }
         public DateTime LastUpdated { get; set; }
     }
 }

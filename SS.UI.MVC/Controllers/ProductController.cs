@@ -120,13 +120,16 @@ namespace SS.UI.MVC.Controllers
                 new DataColumn("PhotoUrl"),
                 new DataColumn("Price"),
                 new DataColumn("Currency"),
-                new DataColumn("LastUpdated") });
+                new DataColumn("LastUpdated"),
+                new DataColumn("Created"),
+
+            });
 
             var productsFromApi = _productApiClient.GetProductsAsync().Result;
 
             foreach (var product in productsFromApi)
             {
-                dataTable.Rows.Add(product.Id, product.Name, product.PhotoUrl, product.Price, product.Currency, product.LastUpdated);
+                dataTable.Rows.Add(product.Id, product.Name, product.PhotoUrl, product.Price, product.Currency, product.LastUpdated, product.Created);
             }
 
             using (var wb = new XLWorkbook())

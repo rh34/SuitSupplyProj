@@ -8,6 +8,8 @@ namespace SS.Product.Api.Configurations
         public ProductProfile()
         {
             CreateMap<Entities.Data.Product, ProductForCreationDto>().ReverseMap();
+            CreateMap<Entities.Data.Product, ProductForUpdateDto>().ReverseMap();
+            CreateMap<Entities.Data.Product, ProductDto>().ReverseMap();
         }
     }
 }

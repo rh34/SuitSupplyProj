@@ -25,6 +25,7 @@ namespace SS.Services
 
         public bool UpdateProduct(Product product)
         {
+            product.LastUpdated = DateTime.Now;
             return _productRepository.UpdateProduct(product);
         }
 
@@ -35,6 +36,8 @@ namespace SS.Services
 
         public bool CreateProduct(Product product)
         {
+            product.Created = DateTime.Now;
+            product.LastUpdated = DateTime.Now;
             return _productRepository.CreateProduct(product);
         }
     }

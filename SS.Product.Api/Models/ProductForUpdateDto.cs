@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SS.Product.Api.Models
 {
-    public class ProductForCreationDto
+    public class ProductForUpdateDto
     {
         [Required]
         [StringLength(500)]
