@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +7,6 @@ using Moq;
 using NUnit.Framework;
 using SS.Product.Api.Controllers;
 using SS.Product.Api.Models;
-using SS.Repositories;
 using SS.Services;
 
 namespace SS.Product.Api.Tests

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SS.UI.MVC.Configuration;
@@ -16,8 +14,6 @@ namespace SS.UI.MVC.Extensions
             configuration.GetSection("HttpClientFactorySettings").Bind(listOfMicros);
             foreach (var microClient in listOfMicros)
             {
-                 
-
                 services.AddHttpClient(microClient.Name, client =>
                     {
                         client.BaseAddress = new Uri(microClient.Url);

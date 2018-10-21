@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SS.UI.MVC.Clients;
 using SS.UI.MVC.Models;
 
 namespace SS.UI.MVC.Controllers
@@ -111,85 +108,6 @@ namespace SS.UI.MVC.Controllers
             {
                 return View();
             }
-        }
-    }
-
-    public interface IProductApiClient
-    {
-        Task<ProductModel> CreateAsync(ProductModel product);
-        Task<ProductModel> GetProductByIdAsync(Guid id);
-        Task<IEnumerable<ProductModel>> GetProductsAsync();
-        Task<bool> PutAsync(ProductModel product, Guid id);
-        Task<bool> DeleteAsync(Guid id);
-    }
-
-    public class ProductApiClient : IProductApiClient
-    {
-        private readonly HttpClient _httpClient;
-        public ProductApiClient(IHttpClientFactory httpClientFactory)
-        {
-            _httpClient = httpClientFactory.CreateClient("ProductApi");
-        }
-
-        public async Task<ProductModel> CreateAsync(ProductModel product)
-        {
-            var response = await _httpClient.PostAsJsonAsync($"/api/products/", product);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<ProductModel>();
-        }
-
-        public async Task<ProductModel> GetProductByIdAsync(Guid id)
-        {
-            var response = await _httpClient.GetAsync($"/api/products/{id}");
-
-            try
-            {
-                response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadAsAsync<ProductModel>();
-            }
-            catch (Exception e)
-            {
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return null;
-                }
-                throw;
-            }
-        }
-
-        public async Task<IEnumerable<ProductModel>> GetProductsAsync()
-        {
-            var response = await _httpClient.GetAsync($"/api/products");
-
-            try
-            {
-                response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadAsAsync<IEnumerable<ProductModel>>();
-            }
-            catch (Exception e)
-            {
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    return null;
-                }
-                throw;
-            }
-        }
-
-        public async Task<bool> PutAsync(ProductModel product, Guid id)
-        {
-            var response = await _httpClient.PutAsJsonAsync($"/api/products/{id}", product);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<bool>();
-        }
-
-        public async Task<bool> DeleteAsync(Guid id)
-        {
-            var response = await _httpClient.DeleteAsync($"/api/products/{id}");
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<bool>();
         }
     }
 }
