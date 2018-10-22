@@ -16,12 +16,10 @@ namespace SS.Product.Api.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
-        private readonly IMapper _mapper;
 
-        public ProductsController(IProductService productService, IMapper mapper)
+        public ProductsController(IProductService productService)
         {
             _productService = productService;
-            _mapper = mapper;
         }
          
 
@@ -40,9 +38,7 @@ namespace SS.Product.Api.Controllers
                 return NotFound();
             }
 
-            var productDtos = _mapper.Map<IEnumerable<ProductDto>>(products);
-
-            return Ok(productDtos);
+            return Ok(products);
         }
 
         /// <summary>
@@ -61,9 +57,7 @@ namespace SS.Product.Api.Controllers
                 return NotFound();
             }
 
-            var productDto = _mapper.Map<ProductDto>(product);
-
-            return Ok(productDto);
+            return Ok(product);
         }
 
         /// <summary>
@@ -81,11 +75,11 @@ namespace SS.Product.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var product = _mapper.Map<Entities.Data.Product>(productForCreation);
+            //var product = _mapper.Map<Entities.Data.Product>(productForCreation);
 
-            var result = _productService.CreateProduct(product);
+            var result = _productService.CreateProduct(productForCreation);
 
-            return CreatedAtRoute("GetProductById", new {id = product.Id}, product);
+            return CreatedAtRoute("GetProductById", new {id = result.Id}, result);
         }
 
         /// <summary>
@@ -106,10 +100,10 @@ namespace SS.Product.Api.Controllers
                 return NotFound();
             }
 
-            var productUpdated = _mapper.Map(productDto, productFromRepo);
-            productUpdated.Id = id;
+            //var productUpdated = _mapper.Map(productDto, productFromRepo);
+            //productUpdated.Id = id;
             
-            var success =_productService.UpdateProduct(productUpdated);
+            var success =_productService.UpdateProduct(id, productDto);
 
             if (success)
             {

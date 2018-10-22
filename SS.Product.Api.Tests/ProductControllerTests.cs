@@ -15,28 +15,21 @@ namespace SS.Product.Api.Tests
     public class ProductControllerTests
     {
         private Mock<IProductService> _mockedService;
-        private Mock<IMapper> _mockedMapper;
+        //private Mock<IMapper> _mockedMapper;
         private ProductsController _productsController;
 
         [SetUp]
         public void SetUp()
         {
-            _mockedMapper = new Mock<IMapper>();
-            _mockedMapper.Setup(m => m.Map<Entities.Data.Product>(It.IsAny<ProductDto>())).Returns(new Entities.Data.Product());
-            _mockedMapper.Setup(m => m.Map<Entities.Data.Product>(It.IsAny<ProductForCreationDto>())).Returns(new Entities.Data.Product());
-            _mockedMapper.Setup(m => m.Map<Entities.Data.Product>(It.IsAny<ProductForUpdateDto>())).Returns(new Entities.Data.Product());
-            _mockedMapper.Setup(m => m.Map<ProductDto>(It.IsAny<Entities.Data.Product>())).Returns(new ProductDto());
-            _mockedMapper.Setup(m => m.Map(It.IsAny<ProductDto>(), It.IsAny<Entities.Data.Product>())).Returns(new Entities.Data.Product());
-            _mockedMapper.Setup(m => m.Map(It.IsAny<ProductForUpdateDto>(), It.IsAny<Entities.Data.Product>())).Returns(new Entities.Data.Product());
 
             _mockedService = new Mock<IProductService>();
-            _mockedService.Setup(r => r.GetProductById(It.IsAny<Guid>())).Returns(new Entities.Data.Product());
-            _mockedService.Setup(r => r.CreateProduct(It.IsAny<Entities.Data.Product>())).Returns(true);
-            _mockedService.Setup(r => r.DeleteProduct(It.IsAny<Entities.Data.Product>())).Returns(true);
-            _mockedService.Setup(r => r.UpdateProduct(It.IsAny<Entities.Data.Product>())).Returns(true);
-            _mockedService.Setup(r => r.GetProducts()).Returns(new List<Entities.Data.Product>{ new Entities.Data.Product() , new Entities.Data.Product() });
+            _mockedService.Setup(r => r.GetProductById(It.IsAny<Guid>())).Returns(new ProductDto());
+            _mockedService.Setup(r => r.CreateProduct(It.IsAny<ProductForCreationDto>())).Returns(new ProductDto());
+            _mockedService.Setup(r => r.DeleteProduct(It.IsAny<ProductDto>())).Returns(true);
+            _mockedService.Setup(r => r.UpdateProduct(It.IsAny<Guid>() ,It.IsAny<ProductForUpdateDto>())).Returns(true);
+            _mockedService.Setup(r => r.GetProducts()).Returns(new List<ProductDto> { new ProductDto() , new ProductDto() });
 
-            _productsController = new ProductsController(_mockedService.Object, _mockedMapper.Object);
+            _productsController = new ProductsController(_mockedService.Object);
         }
 
         [Test]
@@ -49,7 +42,7 @@ namespace SS.Product.Api.Tests
             result.Value.Should().NotBeNull();
             result.RouteValues.Should().NotBeNull();
 
-            _mockedService.Verify(r=>r.CreateProduct(It.IsAny<Entities.Data.Product>()), Times.Once);
+            _mockedService.Verify(r=>r.CreateProduct(It.IsAny<ProductForCreationDto>()), Times.Once);
         }
 
         [Test]
@@ -60,7 +53,7 @@ namespace SS.Product.Api.Tests
 
             result.Should().NotBeNull();
 
-            _mockedService.Verify(r => r.DeleteProduct(It.IsAny<Entities.Data.Product>()), Times.Once);
+            _mockedService.Verify(r => r.DeleteProduct(It.IsAny<ProductDto>()), Times.Once);
         }
 
         [Test]
@@ -71,7 +64,7 @@ namespace SS.Product.Api.Tests
 
             result.Should().NotBeNull();
 
-            _mockedService.Verify(r => r.UpdateProduct(It.IsAny<Entities.Data.Product>()), Times.Once);
+            _mockedService.Verify(r => r.UpdateProduct(It.IsAny<Guid>(), It.IsAny<ProductForUpdateDto>()), Times.Once);
         }
 
         [Test]
@@ -89,14 +82,14 @@ namespace SS.Product.Api.Tests
         [Test]
         public void Given_NoProducts_InRepo_GetProducts_Should_ReturnNotFound()
         {
-            _mockedService.Setup(p => p.GetProducts()).Returns((IEnumerable<Entities.Data.Product>) null);
+            _mockedService.Setup(p => p.GetProducts()).Returns((IEnumerable<ProductDto>) null);
             var actionResult = _productsController.Get();
             var result = actionResult as NotFoundResult;
 
             result.Should().NotBeNull();
 
             _mockedService.Verify(r => r.GetProducts(), Times.Once);
-            _mockedMapper.Verify(r => r.Map<IEnumerable<ProductDto>>(It.IsAny<IEnumerable<Entities.Data.Product>>()), Times.Never);
+            //_mockedMapper.Verify(r => r.Map<IEnumerable<ProductDto>>(It.IsAny<IEnumerable<Entities.Data.Product>>()), Times.Never);
         }
 
         [Test]
@@ -113,14 +106,14 @@ namespace SS.Product.Api.Tests
         [Test]
         public void Given_NoMatch_InRepo_GetProductById_Should_ReturnNotFound()
         {
-            _mockedService.Setup(p => p.GetProductById(It.IsAny<Guid>())).Returns((Entities.Data.Product)null);
+            _mockedService.Setup(p => p.GetProductById(It.IsAny<Guid>())).Returns((ProductDto)null);
             var actionResult = _productsController.Get(Guid.NewGuid());
             var result = actionResult as NotFoundResult;
 
             result.Should().NotBeNull();
 
             _mockedService.Verify(r => r.GetProductById(It.IsAny<Guid>()), Times.Once);
-            _mockedMapper.Verify(r => r.Map<ProductDto>(It.IsAny<Entities.Data.Product>()), Times.Never);
+            //_mockedMapper.Verify(r => r.Map<ProductDto>(It.IsAny<Entities.Data.Product>()), Times.Never);
         }
     }
 }

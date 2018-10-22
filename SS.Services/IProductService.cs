@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using SS.Entities.Data;
+using SS.Product.Api.Dto.Product.Input;
+using SS.Product.Api.Dto.Product.Output;
 
 namespace SS.Services
 {
     public interface IProductService
     {
-        IEnumerable<Entities.Data.Product> GetProducts();
-        Entities.Data.Product GetProductById(Guid id);
-        bool UpdateProduct(Entities.Data.Product product);
-        bool DeleteProduct(Entities.Data.Product product);
-        bool CreateProduct(Entities.Data.Product product);
+        IEnumerable<ProductDto> GetProducts();
+        ProductDto GetProductById(Guid id);
+        bool UpdateProduct(Guid id, ProductForUpdateDto product);
+        bool DeleteProduct(ProductDto product);
+        ProductDto CreateProduct(ProductForCreationDto product);
     }
 }
