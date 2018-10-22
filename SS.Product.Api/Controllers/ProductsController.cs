@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SS.Product.Api.Dto.Product.Input;
 using SS.Product.Api.Dto.Product.Output;
@@ -11,7 +10,9 @@ namespace SS.Product.Api.Controllers
     /// <summary>
     /// Products controller
     /// </summary>
-    [Route("api/products")]
+    [Route("api/{v:apiVersion}/products")]
+    [Produces("application/json")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class ProductsController : ControllerBase
     {

@@ -17,14 +17,14 @@ namespace SS.UI.MVC.Clients
 
         public async Task<ProductModel> CreateAsync(ProductModel product)
         {
-            var response = await _httpClient.PostAsJsonAsync($"/api/products/", product);
+            var response = await _httpClient.PostAsJsonAsync($"/api/1.0/products/", product);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<ProductModel>();
         }
 
         public async Task<ProductModel> GetProductByIdAsync(Guid id)
         {
-            var response = await _httpClient.GetAsync($"/api/products/{id}");
+            var response = await _httpClient.GetAsync($"/api/1.0/products/{id}");
 
             try
             {
@@ -44,7 +44,7 @@ namespace SS.UI.MVC.Clients
 
         public async Task<IEnumerable<ProductModel>> GetProductsAsync()
         {
-            var response = await _httpClient.GetAsync($"/api/products");
+            var response = await _httpClient.GetAsync($"/api/1.0/products");
 
             try
             {
@@ -64,14 +64,14 @@ namespace SS.UI.MVC.Clients
 
         public async Task<bool> PutAsync(ProductModel product, Guid id)
         {
-            var response = await _httpClient.PutAsJsonAsync($"/api/products/{id}", product);
+            var response = await _httpClient.PutAsJsonAsync($"/api/1.0/products/{id}", product);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<bool>();
         }
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            var response = await _httpClient.DeleteAsync($"/api/products/{id}");
+            var response = await _httpClient.DeleteAsync($"/api/1.0/products/{id}");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<bool>();
         }
