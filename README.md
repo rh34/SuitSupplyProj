@@ -3,7 +3,8 @@
 
 <b>UI - Asp.net Core MVC</b>
 
-It can be run using Visual Studio 2017. The api url base is in the appsettings.json file.
+* It can be run using Visual Studio 2017. The api url base is in the appsettings.json file.
+* Product management page is located at /Product
 
 <b>API - Asp.net Core</b>
 
