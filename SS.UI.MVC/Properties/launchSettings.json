@@ -1,9 +1,10 @@
 ﻿{
   "iisSettings": {
     "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:2019",
+      "launchUrl": "http://localhost:2019/product",
       "sslPort": 0
     }
   },
@@ -19,6 +20,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5000",
+      "launchUrl": "http://localhost:5000/product",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
