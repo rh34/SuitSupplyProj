@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using SS.Product.Api.Controllers;
-using SS.Product.Api.Models;
+using SS.Product.Api.Dto.Product.Input;
+using SS.Product.Api.Dto.Product.Output;
 using SS.Services;
 
 namespace SS.Product.Api.Tests

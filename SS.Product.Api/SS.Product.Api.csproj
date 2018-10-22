@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SS.Product.Api.Dto\SS.Product.Api.Dto.csproj" />
     <ProjectReference Include="..\SS.Services\SS.Services.csproj" />
   </ItemGroup>
 

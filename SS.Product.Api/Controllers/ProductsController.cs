@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SS.Product.Api.Models;
+using SS.Product.Api.Dto.Product.Input;
+using SS.Product.Api.Dto.Product.Output;
 using SS.Services;
 
 namespace SS.Product.Api.Controllers

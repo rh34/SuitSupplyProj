@@ -1,4 +1,4 @@
-﻿namespace SS.Product.Api.Models
+﻿namespace SS.Product.Api.Dto.Product.Output
 {
     public enum CurrencyEnumDto
     {

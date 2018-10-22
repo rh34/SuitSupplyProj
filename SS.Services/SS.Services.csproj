@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SS.Entities\SS.Entities.csproj" />
+    <ProjectReference Include="..\SS.Product.Api.Dto\SS.Product.Api.Dto.csproj" />
     <ProjectReference Include="..\SS.Repositories\SS.Repositories.csproj" />
   </ItemGroup>
 

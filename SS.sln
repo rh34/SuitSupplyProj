@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SS.Services", "SS.Services\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SS.UI.MVC", "SS.UI.MVC\SS.UI.MVC.csproj", "{DE68C8B5-B244-4A72-8A49-E55D6F087225}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS.Product.Api.Dto", "SS.Product.Api.Dto\SS.Product.Api.Dto.csproj", "{BDB07A7E-8E3B-46A7-A52D-E8E6AB68683B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{DE68C8B5-B244-4A72-8A49-E55D6F087225}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE68C8B5-B244-4A72-8A49-E55D6F087225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE68C8B5-B244-4A72-8A49-E55D6F087225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB07A7E-8E3B-46A7-A52D-E8E6AB68683B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB07A7E-8E3B-46A7-A52D-E8E6AB68683B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB07A7E-8E3B-46A7-A52D-E8E6AB68683B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB07A7E-8E3B-46A7-A52D-E8E6AB68683B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

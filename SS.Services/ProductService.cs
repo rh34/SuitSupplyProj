@@ -13,28 +13,28 @@ namespace SS.Services
         {
             _productRepository = productRepository;
         }
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Entities.Data.Product> GetProducts()
         {
             return _productRepository.GetProducts();
         }
 
-        public Product GetProductById(Guid id)
+        public Entities.Data.Product GetProductById(Guid id)
         {
             return _productRepository.GetProductById(id);
         }
 
-        public bool UpdateProduct(Product product)
+        public bool UpdateProduct(Entities.Data.Product product)
         {
             product.LastUpdated = DateTime.Now;
             return _productRepository.UpdateProduct(product);
         }
 
-        public bool DeleteProduct(Product product)
+        public bool DeleteProduct(Entities.Data.Product product)
         {
             return _productRepository.DeleteProduct(product);
         }
 
-        public bool CreateProduct(Product product)
+        public bool CreateProduct(Entities.Data.Product product)
         {
             product.Created = DateTime.Now;
             product.LastUpdated = DateTime.Now;

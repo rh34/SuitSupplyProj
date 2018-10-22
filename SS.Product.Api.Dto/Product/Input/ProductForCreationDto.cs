@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using SS.Product.Api.Dto.Product.Output;
 
-namespace SS.Product.Api.Models
+namespace SS.Product.Api.Dto.Product.Input
 {
-    public class ProductForUpdateDto
+    public class ProductForCreationDto
     {
         [Required]
         [StringLength(500)]

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS.Product.Api.Models
+namespace SS.Product.Api.Dto.Product.Output
 {
     public class ProductDto
     {

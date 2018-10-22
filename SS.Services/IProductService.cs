@@ -6,10 +6,10 @@ namespace SS.Services
 {
     public interface IProductService
     {
-        IEnumerable<Product> GetProducts();
-        Product GetProductById(Guid id);
-        bool UpdateProduct(Product product);
-        bool DeleteProduct(Product product);
-        bool CreateProduct(Product product);
+        IEnumerable<Entities.Data.Product> GetProducts();
+        Entities.Data.Product GetProductById(Guid id);
+        bool UpdateProduct(Entities.Data.Product product);
+        bool DeleteProduct(Entities.Data.Product product);
+        bool CreateProduct(Entities.Data.Product product);
     }
 }
